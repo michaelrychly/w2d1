@@ -1,9 +1,9 @@
-function getAndPrintHTMLChunks () {
+function getAndPrintHTML () {
   var https = require('https');
 
   var requestOptions = {
     host: 'sytantris.github.io',
-    path: '/http-examples/step1.html'
+    path: '/http-examples/step2.html'
   };
   var buffer = "";
 
@@ -16,9 +16,11 @@ function getAndPrintHTMLChunks () {
     }
 
     res.on("data", function(chunks){
-      console.log("chunks", chunks.length);
-      console.log(chunks + '\n');
       buffer += chunks;
+    });
+
+    res.on("data", function(){
+      console.log(buffer);
     });
 
     res.on("end", function(){
@@ -27,4 +29,4 @@ function getAndPrintHTMLChunks () {
   });
 };
 
-getAndPrintHTMLChunks();
+getAndPrintHTML();
