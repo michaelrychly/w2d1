@@ -1,4 +1,4 @@
-var get = function getHTML (options, callback) {
+module.exports = function getHTML (options, callback) {
   var https = require('https');
   var buffer = "";
 
@@ -24,10 +24,3 @@ var get = function getHTML (options, callback) {
     });
   });
 }
-
-var print = function printHTML (html) {
-  console.log(html);
-}
-
-module.exports.get = get;
-module.exports.print = print;
