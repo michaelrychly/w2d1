@@ -1,13 +1,8 @@
-function getAndPrintHTML () {
+function getHTML (options, callback) {
   var https = require('https');
-
-  var requestOptions = {
-    host: 'sytantris.github.io',
-    path: '/http-examples/step2.html'
-  };
   var buffer = "";
 
-  https.get(requestOptions, function(res){
+  https.get(options, function(res){
     var statusCode = res.statusCode;
 
     if (statusCode !== 200){
@@ -20,13 +15,23 @@ function getAndPrintHTML () {
     });
 
     res.on("data", function(){
-      console.log(buffer);
+      callback(buffer);
     });
 
     res.on("end", function(){
       console.log("Response stream complete");
     });
   });
+
+}
+
+function printHTML (html) {
+  console.log(html);
+}
+
+var requestOptions = {
+  host: 'sytantris.github.io',
+  path: '/http-examples/step4.html'
 };
 
-getAndPrintHTML();
+getHTML(requestOptions, printHTML);
